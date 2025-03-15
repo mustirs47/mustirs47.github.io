@@ -40,3 +40,15 @@ function resetSudoku() {
     seconds = 0;
     minutes = 0;
 }
+function generateSudoku() {
+    const grid = document.getElementById("sudoku-grid");
+    grid.innerHTML = "";
+    
+    for (let i = 0; i < 81; i++) {  // 9x9 = 81 Felder
+        const cell = document.createElement("input");
+        cell.type = "text";
+        cell.classList.add("cell");
+        cell.maxLength = 1;
+        grid.appendChild(cell);
+    }
+}
