@@ -1,5 +1,5 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
     text-align: center;
     background: linear-gradient(135deg, #4A90E2, #0052D4);
     color: white;
@@ -31,16 +31,6 @@ button {
 
 button:hover {
     background: #FFC107;
-}
-
-/* Animationen */
-@keyframes fadeIn {
-    from { opacity: 0; transform: scale(0.8); }
-    to { opacity: 1; transform: scale(1); }
-}
-
-#reaction-button {
-    animation: fadeIn 0.5s ease-in-out;
 }
 
 /* Dark Mode */
