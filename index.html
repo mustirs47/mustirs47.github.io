@@ -1,26 +1,20 @@
 <!DOCTYPE html>
-<html>
+<html lang="de">
 <head>
-    <title>Reaktionstest</title>
-    <script>
-        let startTime;
-        function startGame() {
-            document.getElementById("start").style.display = "none";
-            setTimeout(() => {
-                startTime = Date.now();
-                document.getElementById("clickMe").style.display = "block";
-            }, Math.random() * 3000 + 2000); // Zwischen 2-5 Sekunden warten
-        }
-        function checkTime() {
-            let reactionTime = Date.now() - startTime;
-            alert("Deine Reaktionszeit: " + reactionTime + " ms!");
-            location.reload();
-        }
-    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reaction Rush</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <button id="start" onclick="startGame()">Starte das Spiel</button>
-    <button id="clickMe" style="display:none;" onclick="checkTime()">Klick mich!</button>
+    <div id="game-container">
+        <h1>Reaction Rush</h1>
+        <p>Tippe auf den Button, sobald er erscheint!</p>
+        <button id="start-button">Spiel starten</button>
+        <button id="reaction-button" style="display: none;">Klick mich!</button>
+        <p id="result"></p>
+        <p id="highscore">Bester Score: <span id="best-score">-</span> ms</p>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
-//test
