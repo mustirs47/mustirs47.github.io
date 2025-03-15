@@ -1,80 +1,42 @@
-let startTime;
-let bestScore = localStorage.getItem("bestScore") || "-";
-document.getElementById("best-score").innerText = bestScore;
-
-// Standardmodus
-document.getElementById("start-button").addEventListener("click", function() {
-    document.getElementById("start-button").style.display = "none";
-    document.getElementById("game-info").innerText = "Warte...";
-    
-    setTimeout(() => {
-        startTime = Date.now();
-        document.getElementById("reaction-button").style.display = "block";
-    }, Math.random() * 3000 + 2000);
+document.addEventListener("DOMContentLoaded", function() {
+    generateSudoku();
 });
 
-document.getElementById("reaction-button").addEventListener("click", function() {
-    let reactionTime = Date.now() - startTime;
-    document.getElementById("game-info").innerText = `Deine Reaktionszeit: ${reactionTime} ms`;
-
-    if (bestScore === "-" || reactionTime < bestScore) {
-        bestScore = reactionTime;
-        localStorage.setItem("bestScore", bestScore);
-        document.getElementById("best-score").innerText = bestScore;
-    }
-
-    document.getElementById("reaction-button").style.display = "none";
-    document.getElementById("start-button").style.display = "block";
-});
-
-// Multiplayer-Modus
-document.getElementById("start-multiplayer").addEventListener("click", function() {
-    document.getElementById("multi-result").innerText = "Warte auf Start...";
-
-    setTimeout(() => {
-        let player1 = prompt("Spieler 1: Drücke OK, wenn du bereit bist.");
-        let start1 = Date.now();
-        prompt("Drücke OK, sobald du den Button siehst!");
-        let reaction1 = Date.now() - start1;
-
-        let player2 = prompt("Spieler 2: Drücke OK, wenn du bereit bist.");
-        let start2 = Date.now();
-        prompt("Drücke OK, sobald du den Button siehst!");
-        let reaction2 = Date.now() - start2;
-
-        if (reaction1 < reaction2) {
-            document.getElementById("multi-result").innerText = `🎉 ${player1} gewinnt mit ${reaction1}ms!`;
-        } else {
-            document.getElementById("multi-result").innerText = `🎉 ${player2} gewinnt mit ${reaction2}ms!`;
+function generateSudoku() {
+    const grid = document.getElementById("sudoku-grid");
+    grid.innerHTML = "";
+    for (let i = 0; i < 9; i++) {
+        for (let j = 0; j < 9; j++) {
+            const cell = document.createElement("input");
+            cell.type = "text";
+            cell.classList.add("cell");
+            cell.maxLength = 1;
+            grid.appendChild(cell);
         }
-    }, Math.random() * 3000 + 2000);
-});
+    }
+}
 
-// Hardcore-Modus
-document.getElementById("start-hardcore").addEventListener("click", function() {
-    document.getElementById("game-info").innerText = "Achtung: Fake-Buttons sind aktiv!";
-    
-    setTimeout(() => {
-        let fakeButton = document.createElement("button");
-        fakeButton.innerText = "Klick mich!";
-        fakeButton.style.background = "red";
-        fakeButton.onclick = () => alert("Falscher Button! Versuch gescheitert.");
-        document.getElementById("game-container").appendChild(fakeButton);
-        
-        startTime = Date.now();
-        document.getElementById("reaction-button").style.display = "block";
-    }, Math.random() * 3000 + 2000);
-});
+// Timer-Funktion
+let seconds = 0;
+let minutes = 0;
+function updateTimer() {
+    seconds++;
+    if (seconds == 60) {
+        seconds = 0;
+        minutes++;
+    }
+    document.getElementById("timer").innerText = `Zeit: ${minutes}:${seconds < 10 ? "0" + seconds : seconds}`;
+}
+setInterval(updateTimer, 1000);
 
-// Tägliche Challenge
-const today = new Date().getDay();
-const challenges = [
-    "Erreiche unter 300ms!",
-    "Spiele den Multiplayer-Modus!",
-    "Gewinne im Hardcore-Modus!",
-    "Schlage deinen Highscore!",
-    "Trainiere 10 Minuten Reaktionszeit!",
-    "Fordere einen Freund heraus!",
-    "Spiele Reaction Rush mit geschlossenen Augen!"
-];
-document.getElementById("daily-challenge").innerText = `🔹 Tages-Challenge: ${challenges[today]}`;
+// Lösung für Sudoku (einfache Implementierung)
+function solveSudoku() {
+    alert("Lösung wird berechnet...");
+}
+
+// Neustart-Funktion
+function resetSudoku() {
+    generateSudoku();
+    seconds = 0;
+    minutes = 0;
+}
