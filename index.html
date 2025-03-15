@@ -3,33 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reaction Rush - Das ultimative Reflex-Spiel</title>
+    <title>Sudoku Master</title>
     <link rel="stylesheet" href="styles.css">
     <script defer src="script.js"></script>
 </head>
 <body>
     <div id="game-container">
-        <h1>Reaction Rush</h1>
-        <p id="game-info">Tippe auf den Button, sobald er erscheint!</p>
-        <button id="start-button">Spiel starten</button>
-        <button id="reaction-button" style="display: none;">Klick mich!</button>
-        
-        <p id="result"></p>
-        <p id="highscore">Bester Score: <span id="best-score">-</span> ms</p>
-        
-        <div id="multiplayer">
-            <h3>Multiplayer-Modus</h3>
-            <button id="start-multiplayer">Starte Challenge</button>
-            <p id="multi-result"></p>
+        <h1>Sudoku Master</h1>
+        <p id="timer">Zeit: 00:00</p>
+        <div id="sudoku-grid"></div>
+        <div id="controls">
+            <button onclick="solveSudoku()">Lösen</button>
+            <button onclick="resetSudoku()">Neustart</button>
         </div>
-        
-        <div id="hardcore-mode">
-            <h3>Hardcore-Modus</h3>
-            <p>Nur für Profis! Ablenkungen und Fake-Buttons.</p>
-            <button id="start-hardcore">Starte Hardcore-Modus</button>
-        </div>
-        
-        <p id="daily-challenge"></p>
+        <p id="status"></p>
     </div>
 </body>
 </html>
