@@ -13,7 +13,6 @@ const grid = [
 document.addEventListener("DOMContentLoaded", () => {
     const sudokuGrid = document.getElementById("sudoku-grid");
     
-    // Erstelle das Gitter
     for (let row = 0; row < 9; row++) {
         for (let col = 0; col < 9; col++) {
             const input = document.createElement("input");
@@ -21,17 +20,19 @@ document.addEventListener("DOMContentLoaded", () => {
             input.type = "number";
             input.min = "1";
             input.max = "9";
+            input.pattern = "[1-9]*"; // Nur Zahlen 1-9 erlauben
             
             if (grid[row][col] !== 0) {
                 input.value = grid[row][col];
                 input.disabled = true;
             } else {
-                input.addEventListener("change", (e) => {
-                    const value = parseInt(e.target.value);
-                    if (value < 1 || value > 9) {
-                        e.target.value = "";
+                input.addEventListener("input", (e) => {
+                    let value = parseInt(e.target.value);
+                    if (isNaN(value) || value < 1 || value > 9) {
+                        e.target.value = ""; // Ungültige Eingaben löschen
+                    } else {
+                        e.target.value = value; // Sicherstellen, dass nur eine Zahl bleibt
                     }
-                    // Optional: Sudoku-Logik hier prüfen
                 });
             }
             
@@ -39,3 +40,17 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 });
+
+// Optional: Einfache Validierungsfunktion
+function isValid(grid, row, col, num) {
+    for (let x = 0; x < 9; x++) {
+        if (grid[row][x] === num || grid[x][col] === num) return false;
+    }
+    let startRow = row - row % 3, startCol = col - col % 3;
+    for (let i = 0; i < 3; i++) {
+        for (let j = 0; j < 3; j++) {
+            if (grid[i + startRow][j + startCol] === num) return false;
+        }
+    }
+    return true;
+}
