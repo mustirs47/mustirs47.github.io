@@ -1,18 +1,57 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sudoku</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Super-Sudoku</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <div class="sudoku-container">
-        <h1>Sudoku</h1>
-        <div id="sudoku-board"></div>
-        <button id="solve-btn">Lösen</button>
-        <button id="reset-btn">Zurücksetzen</button>
+
+  <div class="container">
+    <h1>Super Sudoku</h1>
+
+    <!-- Steuer-Leiste oben -->
+    <div class="top-controls">
+      <div class="difficulty-container">
+        <label for="difficulty">Schwierigkeitsgrad:</label>
+        <select id="difficulty">
+          <option value="easy">Einfach</option>
+          <option value="medium">Mittel</option>
+          <option value="hard">Schwer</option>
+          <option value="expert">Experte</option>
+        </select>
+      </div>
+
+      <button id="new-game-btn">Neues Spiel</button>
+
+      <div class="timer-container">
+        <span>Timer: </span><span id="timer">00:00</span>
+      </div>
     </div>
-    <script src="script.js"></script>
+
+    <!-- Sudoku-Board -->
+    <div id="sudoku-board" class="sudoku-board"></div>
+
+    <!-- Steuer-Leiste unten -->
+    <div class="bottom-controls">
+      <div class="left-controls">
+        <button id="undo-btn">↶ Rückg.</button>
+        <button id="redo-btn">↷ Wiederh.</button>
+        <button id="notes-toggle-btn" class="notes-off">Notizen: Aus</button>
+        <button id="check-btn">Prüfen</button>
+        <button id="hint-btn">Hinweis</button>
+      </div>
+      <div class="right-controls">
+        <button id="dark-mode-btn">Dark Mode</button>
+      </div>
+    </div>
+
+    <!-- Status-Anzeige (Fehler, Erfolg) -->
+    <div id="status-message" class="status-message"></div>
+
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
